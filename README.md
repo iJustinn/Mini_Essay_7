@@ -1,1 +1,3 @@
 # Mini_Essay_7
+
+This essay explores the impact of data collection and cleaning errors on statistical analysis through a simulated dataset, demonstrating how instrument limitations and cleaning mistakes significantly distort data integrity. Employing a one-sample t-test, it assesses whether these errors falsely suggest the population mean differs from zero. It highlights the critical importance of stringent data management practices, including regular instrument checks and comprehensive cleaning protocols, to ensure the reliability of statistical inferences. Finally, the essay proposes mitigation strategies aimed at preserving data integrity, emphasizing the role of meticulous attention to detail in every phase of data handling.
