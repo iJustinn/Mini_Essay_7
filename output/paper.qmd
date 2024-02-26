@@ -6,20 +6,23 @@ author:
 thanks: "Code and data are available at: https://github.com/iJustinn/Mini_Essay_7"
 date: today
 date-format: long
-abstract: ""
+abstract: "This essay explores the impact of data collection and cleaning errors on statistical analysis through a simulated dataset, demonstrating how instrument limitations and cleaning mistakes significantly distort data integrity. Employing a one-sample t-test, it assesses whether these errors falsely suggest the population mean differs from zero. It highlights the critical importance of stringent data management practices, including regular instrument checks and comprehensive cleaning protocols, to ensure the reliability of statistical inferences. Finally, the essay proposes mitigation strategies aimed at preserving data integrity, emphasizing the role of meticulous attention to detail in every phase of data handling."
 format: pdf
 toc: true
 toc-depth: 3
 number-sections: true
+bibliography: references.bib
 ---
 
 # Introduction
 
-In the process of data analysis, the integrity and accuracy of the data are paramount. This case study serves as an illustrative example of how data collection errors and subsequent mishandling during the cleaning phase can significantly impact the results of statistical analyses. The scenario involves a sample of 1,000 observations purportedly drawn from a normal distribution with a mean of one and a standard deviation of one. However, due to instrument limitations and errors introduced during data cleaning, the final dataset deviates from its original characteristics. This paper explores the nature of these errors, their impact on the analysis, and proposes strategies to identify and mitigate such issues in future research endeavors.
+In the process of data analysis, the integrity and accuracy of the data are paramount. This study serves as an illustrative example of how data collection errors and subsequent mishandling during the cleaning phase can significantly impact the results of statistical analyses. The scenario involves a sample of 1,000 observations purportedly drawn from a normal distribution with a mean of one and a standard deviation of one. However, due to instrument limitations and errors introduced during data cleaning, the final dataset deviates from its original characteristics. This paper explores the nature of these errors, their impact on the analysis, and proposes strategies to identify and mitigate such issues in future research endeavors.
 
 # Data and Method
 
 ## Data Generation and Cleaning Process
+
+The entire study was performed using the programming language R [@citeR].
 
 The initial data generation process aimed to simulate observations from a normal distribution. However, the first complication arose due to the instrument's memory limitation, which capped storage at 900 observations. This led to the overwriting of the final 100 observations with the first 100, introducing a significant repetition bias.
 
@@ -52,3 +55,9 @@ To prevent such issues from compromising future analyses, several steps can be i
 # Conclusion
 
 This case study highlights the critical importance of data integrity throughout the collection and analysis process. The introduction of errors, whether through instrument limitations or during data cleaning, can significantly alter the outcomes of statistical analyses, leading to potentially erroneous conclusions. By implementing robust checks, protocols, and training, researchers can mitigate the impact of these issues, enhancing the reliability and validity of their findings.
+
+\newpage
+
+# References
+
+
