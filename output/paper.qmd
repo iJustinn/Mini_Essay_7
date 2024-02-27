@@ -1,12 +1,12 @@
 ---
-title: "Analysis of Data Cleaning and Its Impact on Statistical Inference"
-subtitle: "A simulation of 1,000 observations using some instrument"
+title: "Empirical Evaluation of Data Cleaning Processes on Statistical Accuracy"
+subtitle: "Simulative Analysis of Instrumental Limitations and Data Integrity on Inferential Outcomes"
 author: 
   - Ziheng Zhong
 thanks: "Code and data are available at: https://github.com/iJustinn/Mini_Essay_7"
 date: today
 date-format: long
-abstract: "This essay explores the impact of data collection and cleaning errors on statistical analysis through a simulated dataset, demonstrating how instrument limitations and cleaning mistakes significantly distort data integrity. Employing a one-sample t-test, it assesses whether these errors falsely suggest the population mean differs from zero. It highlights the critical importance of stringent data management practices, including regular instrument checks and comprehensive cleaning protocols, to ensure the reliability of statistical inferences. Finally, the essay proposes mitigation strategies aimed at preserving data integrity, emphasizing the role of meticulous attention to detail in every phase of data handling."
+abstract: "This study investigates the effects of data collection and cleaning inaccuracies on statistical outcomes using simulation. It demonstrates how errors can distort data, potentially leading to incorrect inferences about population means. The importance of rigorous data management and cleaning practices to maintain data integrity and reliability of statistical findings is emphasized, along with proposed strategies for mitigating such errors."
 format: pdf
 toc: true
 toc-depth: 3
@@ -27,6 +27,51 @@ The entire study was performed using the programming language R [@citeR].
 The initial data generation process aimed to simulate observations from a normal distribution. However, the first complication arose due to the instrument's memory limitation, which capped storage at 900 observations. This led to the overwriting of the final 100 observations with the first 100, introducing a significant repetition bias.
 
 Subsequently, the data cleaning process, intended to refine the dataset, inadvertently introduced two critical errors. Firstly, half of the negative values were mistakenly converted to positive, distorting the distribution of the data. Secondly, for values between 1 and 1.1, the decimal place was erroneously shifted, further compounding the inaccuracies in the dataset.
+
+```{r}
+#| message: false
+#| echo: false
+#| warning: false
+#| fig-pos: 'h'
+#| label: fig-one
+#| fig-cap: Impact of Data Cleaning on Distribution
+
+# Load necessary library
+library(ggplot2)
+
+# Step 1: Generate the initial dataset
+set.seed(123) # For reproducibility
+true_data <- rnorm(1000, mean = 1, sd = 1)
+
+# Simulate the instrument memory issue
+final_data <- true_data
+final_data[901:1000] <- true_data[1:100]
+
+# Step 2: Cleaning process mistakes
+# Changing half of the negative draws to be positive
+negative_indices <- which(final_data < 0)
+# Selecting half of the negative values randomly
+selected_negatives <- sample(negative_indices, length(negative_indices) / 2)
+final_data[selected_negatives] <- -final_data[selected_negatives]
+
+# Step 3: Changing the decimal place for values between 1 and 1.1
+decimal_change_indices <- which(final_data > 1 & final_data < 1.1)
+final_data[decimal_change_indices] <- final_data[decimal_change_indices] / 10
+
+# Combine datasets for plotting
+data_combined <- data.frame(Value = c(true_data, final_data),
+                            Type = factor(rep(c("Original", "Cleaned"), each = 1000)))
+
+# Generate the plot
+ggplot(data_combined, aes(x = Value, fill = Type)) +
+  geom_density(alpha = 0.6) +
+  labs(x = "Value",
+       y = "Density") +
+  theme_minimal() +
+  scale_fill_manual(values = c("Original" = "blue", "Cleaned" = "red"))
+```
+
+@fig-one illustrates the impact of data cleaning errors on data distribution, comparing the original dataset to the cleaned dataset where half of the negative values have been erroneously converted to positive. The original data, simulated from a normal distribution, contrasts with the cleaned data, which shows a significant distortion due to the cleaning errors.
 
 ## Statistical Analysis and Findings
 
